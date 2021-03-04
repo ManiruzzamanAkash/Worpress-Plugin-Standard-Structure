@@ -8,6 +8,8 @@ Version: 1.0.0
 Author URI: http://ma.tt/
 */
 
+use WeDevs\Academy\Installer;
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -60,13 +62,8 @@ final class WeDevs_Academy
      */
     public function activate()
     {
-        $installed = get_option('wd_academy_installed');
-
-        if (!$installed) {
-            update_option('wd_academy_installed', time());
-        }
-
-        update_option('wd_academy_version', WD_ACADEMY_VERSION);
+        $installer = new Installer();
+        $installer->run();
     }
 
     /**

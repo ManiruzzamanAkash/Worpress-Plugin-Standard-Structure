@@ -4,12 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c936edc12b4cc80cda0f81daa52a717d",
+    "content-hash": "f07152cf0d91073136c453c3cd232590",
     "packages": [],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "tareq1988/wp-php-cs-fixer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tareq1988/wp-php-cs-fixer.git",
+                "reference": "56b9c1dd2b979a4ff7a25afa2e1c6b290a5ae876"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tareq1988/wp-php-cs-fixer/zipball/56b9c1dd2b979a4ff7a25afa2e1c6b290a5ae876",
+                "reference": "56b9c1dd2b979a4ff7a25afa2e1c6b290a5ae876",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WeDevs\\Fixer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tareq Hasan",
+                    "email": "tareq@wedevs.com"
+                }
+            ],
+            "description": "WordPress rules for php-cs-fixer",
+            "support": {
+                "issues": "https://github.com/tareq1988/wp-php-cs-fixer/issues",
+                "source": "https://github.com/tareq1988/wp-php-cs-fixer/tree/master"
+            },
+            "time": "2020-09-21T09:47:38+00:00"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "tareq1988/wp-php-cs-fixer": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

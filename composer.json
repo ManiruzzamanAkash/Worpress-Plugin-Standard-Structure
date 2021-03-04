@@ -10,11 +10,13 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
     "autoload": {
         "psr-4": {
             "WeDevs\\Academy\\": "includes/"
         },
-        "files": []
+        "files": [ "includes/functions.php"]
+    },
+    "require-dev": {
+        "tareq1988/wp-php-cs-fixer": "dev-master"
     }
 }

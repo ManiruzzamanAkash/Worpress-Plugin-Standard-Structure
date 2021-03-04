@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WeDevs\\Fixer\\' => array($vendorDir . '/tareq1988/wp-php-cs-fixer/src'),
     'WeDevs\\Academy\\' => array($baseDir . '/includes'),
 );
