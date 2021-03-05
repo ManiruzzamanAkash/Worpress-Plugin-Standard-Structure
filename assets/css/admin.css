@@ -1,0 +1,9 @@
+/********************************************** 
+            Validation CSS
+/**********************************************/
+.form-invalid input {
+    border: 1px solid red;
+}
+.form-invalid .error {
+    color: red;
+}

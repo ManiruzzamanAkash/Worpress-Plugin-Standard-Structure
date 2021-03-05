@@ -1,11 +1,3 @@
-<style>
-.form-invalid input {
-    border: 1px solid red;
-}
-.form-invalid .error {
-    color: red;
-}
-</style>
 <div class="wrap">
     <h1><?php _e('New Address', 'wedevs-academy'); ?></h1>
 
