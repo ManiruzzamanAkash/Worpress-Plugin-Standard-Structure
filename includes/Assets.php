@@ -8,20 +8,35 @@ namespace WeDevs\Academy;
 class Assets
 {
     function __construct() {
-        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_assets'] );
-        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets'] );
+        add_action( 'wp_enqueue_scripts', [ $this, 'register_assets'] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'register_assets'] );
     }
 
+    /**
+     * Get Scripts
+     *
+     * @return array scripts array
+     */
     public function get_scripts() {
         return [
             'academy-script' => [
                 'src' => WD_ACADEMY_ASSETS . '/js/frontend.js',
                 'version' => filemtime(WD_ACADEMY_PATH . '/assets/js/frontend.js' ),
                 'is_footer' => true
+            ],
+            'academy-contact-script' => [
+                'src' => WD_ACADEMY_ASSETS . '/js/contact.js',
+                'version' => filemtime(WD_ACADEMY_PATH . '/assets/js/contact.js' ),
+                'is_footer' => true
             ]
         ];
     }
 
+    /**
+     * Get Styles
+     *
+     * @return array Styles as array
+     */
     public function get_styles() {
         return [
             'academy-style' => [
@@ -33,11 +48,23 @@ class Assets
                 'src' => WD_ACADEMY_ASSETS . '/css/admin.css',
                 'version' => filemtime(WD_ACADEMY_PATH . '/assets/css/admin.css' ),
                 'is_footer' => false
+            ],
+            'academy-contact-style' => [
+                'src' => WD_ACADEMY_ASSETS . '/css/contact.css',
+                'version' => filemtime(WD_ACADEMY_PATH . '/assets/css/contact.css' ),
+                'is_footer' => false
             ]
         ];
     }
 
-    public function enqueue_assets () {
+    /**
+     * Register Assets
+     * 
+     * Register all of the assets
+     *
+     * @return void
+     */
+    public function register_assets () {
         $scripts = $this->get_scripts();
 
         foreach ( $scripts as $handle => $script ) {
@@ -53,5 +80,10 @@ class Assets
 
             wp_register_style( $handle, $style[ 'src' ], $deps, $style[ 'version' ], $style[ 'is_footer' ] );
         }
+
+        wp_localize_script( 'academy-contact-script', 'weDevsAcademy', [
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'error' => __( 'Something went wrong !!', 'wedevs-academy' )
+        ] );
     }
 }

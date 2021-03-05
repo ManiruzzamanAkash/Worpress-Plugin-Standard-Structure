@@ -36,9 +36,9 @@ final class WeDevs_Academy
     {
         $this->define_constants();
 
-        register_activation_hook(__FILE__, [$this, 'activate']);
+        register_activation_hook( __FILE__, [ $this, 'activate' ] );
 
-        add_action('plugins_loaded', [$this, 'init_plugin']);
+        add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
     }
 
     /**
@@ -49,7 +49,11 @@ final class WeDevs_Academy
     public function init_plugin()
     {
         new WeDevs\Academy\Assets();
-        
+
+        if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+            new WeDevs\Academy\Ajax();
+        }
+
         if (is_admin()) {
             new WeDevs\Academy\Admin();
         }else{
