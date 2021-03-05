@@ -21,25 +21,52 @@ function wd_ac_insert_address( $args = [] ) {
         'created_by'        => get_current_user_id(),
     ];
 
-    $data = wp_parse_args($args, $defaults);
+    $data = wp_parse_args( $args, $defaults );
 
-    $inserted = $wpdb->insert(
-        "{$wpdb->prefix}ac_addresses",
-        $data,
-        [
-            '%s',
-            '%s',
-            '%s',
-            '%s',
-            '%d'
-        ]
-    );
+    if ( isset( $data[ 'id' ] ) ) {
 
-    if ( ! $inserted ) {
-        return new \WP_Error( 'failed-to-insert' , __( 'Failed to insert data', 'wedevs_academy' ) );
+        $id = $data [ 'id' ];
+        unset( $data[ 'id' ] );
+
+        $updated = $wpdb->update(
+            "{$wpdb->prefix}ac_addresses",
+            $data,
+            [ 'id' => $id ],
+            [
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%d'
+            ],
+            [ '%d' ]
+        );
+
+        if ( ! $updated ) {
+            return new \WP_Error( 'failed-to-update' , __( 'Failed to update data', 'wedevs_academy' ) );
+        }
+
+        return $updated;
+    }else {
+
+        $inserted = $wpdb->insert(
+            "{$wpdb->prefix}ac_addresses",
+            $data,
+            [
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%d'
+            ]
+        );
+
+        if ( ! $inserted ) {
+            return new \WP_Error( 'failed-to-insert' , __( 'Failed to insert data', 'wedevs_academy' ) );
+        }
+
+        return $inserted;
     }
-
-    return $inserted;
 }
 
 /**
@@ -80,5 +107,37 @@ function wd_ac_get_addresses_count ( ) {
 
     return (int) $wpdb->get_var( 
         "SELECT COUNT(id) as total_addresses FROM {$wpdb->prefix}ac_addresses"
+    );
+}
+
+/**
+ * Get Single Address Information
+ * 
+ * @param int $id
+ * 
+ * @return Object Single Address Object
+ */
+function wd_ac_get_address ( $id ) {
+    global $wpdb;
+
+    return $wpdb->get_row( 
+        $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}ac_addresses WHERE id = %d LIMIT 1", $id )
+    );
+}
+
+/**
+ * Delete Address
+ *
+ * @param int $id
+ * 
+ * @return Object deleted result
+ */
+function wd_ac_delete_address ( $id ) {
+    global $wpdb;
+
+    return (int) $wpdb->delete(
+        $wpdb->prefix .'ac_addresses',
+         [ 'id' => $id ],
+         [ '%d' ]
     );
 }
