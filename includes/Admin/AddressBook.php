@@ -142,4 +142,30 @@ class AddressBook
         wp_redirect( $redirected_to );
         exit;
     }
+
+    /**
+     * Delete Address
+     *
+     * @return void Redirects to address list page
+     */
+    public function delete_address_ajax()
+    {
+        
+        if ( ! wp_verify_nonce($_POST['_wpnonce'], 'wd-ac-delete-address') ) {
+            wp_die('Invalid & trying to attack csrf !!');
+        }
+
+        if ( ! current_user_can('manage_options') ) {
+            wp_die('Are you cheating ??');
+        }
+
+        $id = isset( $_POST['id'] ) ? sanitize_text_field( $_POST['id'] ) : 0;
+        
+        if ( wd_ac_delete_address ( $id ) ) {
+            return true;
+        } else {
+            return false;
+        }
+        exit;
+    }
 }
