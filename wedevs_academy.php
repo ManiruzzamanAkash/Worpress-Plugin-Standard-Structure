@@ -59,6 +59,8 @@ final class WeDevs_Academy
         }else{
             new WeDevs\Academy\Frontend();
         }
+
+        new WeDevs\Academy\API();
     }
 
     /**
